@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/lth/Scheduler/node_modules/react-native-navigation/ios/Helpers/RCTHelpers.m \
+  /Users/lth/Scheduler/node_modules/react-native-navigation/ios/Helpers/RCTHelpers.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTView.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTScrollView.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAutoInsetsProtocol.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventDispatcher.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTScrollableProtocol.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFont.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/lth/Scheduler/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h
