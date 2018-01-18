@@ -1,12 +1,17 @@
 import {TabNavigator} from 'react-navigation';
-import {Home, Calender, Profile,TaskList, AddTask, Footer} from '../components';
+import {Footer} from '../components';
+
+import Calendar from '../containers/Calendar';
+import TaskList from '../containers/TaskList';
+
+
 
 export default FooterNavigator = TabNavigator({
   list: {
     screen: TaskList,
   },
   calendar: {
-    screen: Calender,
+    screen: Calendar,
     key: 'tab1',
   }
 }, {

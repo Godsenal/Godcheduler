@@ -1,23 +1,16 @@
 import * as types from '../actions/ActionTypes';
-import update from 'react-addons-update';
+import { Map, List, fromJS } from 'immutable';
 
 import { Dimensions } from "react-native";
 
-const initialState = {
+const initialState = Map({
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-};
-export default function layout(state,action){
-  if(typeof state === 'undefined') {
-    state = initialState;
-  }
-
+});
+export default function layout(state = initialState,action){
   switch (action.type) {
     case types.LAYOUT_CHANGE:
-      return update(state, {
-        width:{$set: action.width},
-        height:{$set: action.height}
-      })
+      return state.set('width', action.width).set('height',action.height);
       break;
     default:
       return state;

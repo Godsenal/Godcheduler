@@ -1,35 +1,27 @@
 import * as types from '../actions/ActionTypes';
-import update from 'react-addons-update';
+import { Map, List, fromJS } from 'immutable';
 
-const initialState = {
-  add: {
+const initialState = Map({
+  add: Map({
     open: false,
-  },
-  list: {
-    tasks: [],
+  }),
+  list: Map({
+    tasks: List([]),
     status: 'INIT',
-  },
-};
+  })
+});
 
-export default function task(state,action){
-  if(typeof state === 'undefined') {
-    state = initialState;
-  }
-
+// Use update function when use previous state,
+// if not, use set function
+export default function task(state = initialState,action){
   switch (action.type) {
     case types.TASK_ADD:
-      return update(state, {
-        list:{
-          tasks:{$push: [action.task]}
-        }
+      return state.updateIn(['list','tasks'],arr => {
+        arr.push(action.task.fromJS())
       })
       break;
     case types.TASK_ADD_TOGGLE:
-      return update(state, {
-        add: {
-          open: {$set: !state.add.open}
-        }
-      })
+      return state.updateIn(['add','open'],val => !val);
     default:
       return state;
       break;

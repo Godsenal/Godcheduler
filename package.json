@@ -17,10 +17,10 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "immutable": "^3.8.2",
     "native-base": "^2.3.5",
     "prop-types": "^15.6.0",
     "react": "16.0.0",
-    "react-addons-update": "^15.6.2",
     "react-native": "0.50.3",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.22",

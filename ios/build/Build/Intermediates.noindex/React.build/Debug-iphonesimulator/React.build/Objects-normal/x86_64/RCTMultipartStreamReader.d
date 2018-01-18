@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/lth/Scheduler/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
-  /Users/lth/Scheduler/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
+  /Users/lth/LTH_App/Scheduler/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
+  /Users/lth/LTH_App/Scheduler/node_modules/react-native/React/Base/RCTMultipartStreamReader.h

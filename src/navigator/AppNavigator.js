@@ -1,17 +1,11 @@
 import {StackNavigator} from 'react-navigation';
-import {Home, Calender} from '../components';
+import {Calendar} from '../containers';
 
 export default AppNavigator = StackNavigator({
-  Home: {
-    screen: Home,
+  Calendar: {
+    screen: Calendar,
     navigationOptions:{
-      title: 'Home',
-    }
-  },
-  Calender: {
-    screen: Calender,
-    navigationOptions:{
-      title: 'Calender',
+      title: 'Calendar',
     }
   },
 });

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/lth/Scheduler/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
-  /Users/lth/Scheduler/node_modules/react-native/ReactCommon/jschelpers/Unicode.h
+  /Users/lth/LTH_App/Scheduler/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
+  /Users/lth/LTH_App/Scheduler/node_modules/react-native/ReactCommon/jschelpers/Unicode.h

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import { Animated, View, StyleSheet, Modal } from 'react-native';
 import {connect} from 'react-redux';
 import { Container, Header,Body, Title, Content, Input, Text,Item, Button,} from 'native-base';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ class AddTask extends Component {
     slideAnim: new Animated.Value(0),
     description: '',
   }
+  /*
   componentWillReceiveProps = (nextProps) => {
     var height = 0;
     if((this.props.task.add.open !== nextProps.task.add.open)&&nextProps.task.add.open){
@@ -22,7 +23,7 @@ class AddTask extends Component {
       }
     ).start();
   }
-  
+  */
   handleChange = (text) => {
     this.setState({
       description: text,
@@ -35,7 +36,10 @@ class AddTask extends Component {
   render() {
     const {description} = this.state;
     return (
-      <Animated.View style={[styles.subView,{maxHeight:this.state.slideAnim}]}>
+      <Modal
+        visible={this.props.task.getIn(['add','open'])}
+        animationType={'slide'}
+        onRequestClose={() => this.props.toggleAddTask()}>
         <Header>
           <Body>
             <Title>Add Task</Title>
@@ -50,7 +54,7 @@ class AddTask extends Component {
             <Text>등록</Text>
           </Button>
         </Content>
-      </Animated.View>
+      </Modal>
     )
   }
 }
