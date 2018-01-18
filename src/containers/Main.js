@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Dimensions, View, StatusBar } from "react-native";
-import AppNavigator from '../navigator/AppNavigator';
 import FooterNavigator from '../navigator/TabNavigator';
-import {Footer, AddTask} from '../components';
+import {Footer} from '../components';
 import {connect} from 'react-redux';
 
 
@@ -22,7 +21,6 @@ class Main extends Component{
     return(
       <View style={{flex: 1}} onLayout={this.onLayout}>
         <FooterNavigator />
-        <AddTask />
       </View>
     );
   }

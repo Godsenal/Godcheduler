@@ -10,11 +10,6 @@ class Calendar extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Body>
-            <Title style={{color: '#04ACF4'}}>Calander</Title>
-          </Body>
-        </Header>
         <Text>
           I'm Calander
         </Text>

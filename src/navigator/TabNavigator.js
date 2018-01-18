@@ -4,18 +4,20 @@ import {Footer} from '../components';
 import Calendar from '../containers/Calendar';
 import TaskList from '../containers/TaskList';
 
+import TaskListNavigator from './TaskListNavigator';
 
 
 export default FooterNavigator = TabNavigator({
   list: {
-    screen: TaskList,
+    screen: TaskListNavigator,
   },
   calendar: {
     screen: Calendar,
-    key: 'tab1',
+    navigationOptions: {title:'Calendar'},
   }
 }, {
   swipeEnabled: true,
   animationEnabled: true,
   tabBarComponent: Footer,
+  tabBarPosition: 'bottom',
 });

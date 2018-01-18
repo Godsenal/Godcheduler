@@ -1,6 +1,7 @@
 import {
   TASK_ADD,
-  TASK_ADD_TOGGLE,
+  TASK_ADD_OPEN,
+  TASK_ADD_CLOSE,
 } from './ActionTypes';
 
 export function addTask(description){
@@ -13,8 +14,14 @@ export function addTask(description){
   }
 }
 
-export function toggleAddTask(){
+export function openAddTask(){
   return {
-    type: TASK_ADD_TOGGLE,
+    type: TASK_ADD_OPEN,
+  }
+}
+
+export function closeAddTask(){
+  return {
+    type: TASK_ADD_CLOSE,
   }
 }

@@ -20,8 +20,10 @@ export default function task(state = initialState,action){
         arr.push(action.task.fromJS())
       })
       break;
-    case types.TASK_ADD_TOGGLE:
-      return state.updateIn(['add','open'],val => !val);
+    case types.TASK_ADD_OPEN:
+      return state.setIn(['add','open'],true);
+    case types.TASK_ADD_CLOSE:
+      return state.setIn(['add','open'],false);
     default:
       return state;
       break;
