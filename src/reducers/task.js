@@ -17,7 +17,7 @@ export default function task(state = initialState,action){
   switch (action.type) {
     case types.TASK_ADD:
       return state.updateIn(['list','tasks'],arr => {
-        arr.push(action.task.fromJS())
+        arr.push(fromJS(action.task))
       })
       break;
     case types.TASK_ADD_OPEN:

@@ -13,7 +13,6 @@ export default FooterNavigator = TabNavigator({
   },
   calendar: {
     screen: Calendar,
-    navigationOptions: {title:'Calendar'},
   }
 }, {
   swipeEnabled: true,

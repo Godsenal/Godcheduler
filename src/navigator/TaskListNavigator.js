@@ -1,5 +1,7 @@
 import {StackNavigator} from 'react-navigation';
-import {TaskList, CategoryTaskList} from '../containers';
+/* 자꾸 임폴트 에러남 ㅡ ㅡ */
+import TaskList from '../containers/TaskList';
+import CategoryTaskList from '../containers/CategoryTaskList';
 
 export default TaskListNavigator = StackNavigator({
   taskList: {

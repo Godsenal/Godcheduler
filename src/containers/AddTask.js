@@ -48,6 +48,7 @@ class AddTask extends Component {
         </Header>
         <Button onPress={this.props.closeAddTask}><Text>X</Text></Button>
         <Content>
+          <Text>Category: {this.props.currentState.params?this.props.currentState.params.category:''}</Text>
           <Item regular>
             <Input placeholder='Regular Textbox' value={description} onChangeText={(text)=>this.handleChange(text)}/>
           </Item>
@@ -77,6 +78,7 @@ const mapStateToProps = (state) => {
   return {
     task: state.task,
     layout: state.layout,
+    currentState: state.navigator.get('currentState').toJS()
   }
 }
 const mapDispatchToProps = (dispatch) => {

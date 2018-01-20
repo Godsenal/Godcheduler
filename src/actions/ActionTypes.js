@@ -3,3 +3,5 @@ export const TASK_ADD_OPEN = 'TASK_ADD_OPEN';
 export const TASK_ADD_CLOSE = 'TASK_ADD_CLOSE';
 
 export const LAYOUT_CHANGE = 'LAYOUT_CHANGE';
+
+export const NAVIGATOR_CHANGE = 'NAVIGATOR_CHANGE';

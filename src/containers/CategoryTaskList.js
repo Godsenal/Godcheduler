@@ -4,22 +4,19 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 export class CategoryTaskList extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
 
   render() {
     return (
       <View>
-
-        <Text>{this.props.navigation.state.category}</Text>
+        
+        <Text>{this.props.currentState.params?this.props.currentState.params.category:''}</Text>
       </View>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  
+  currentState: state.navigator.get('currentState').toJS()
 })
 
 const mapDispatchToProps = {

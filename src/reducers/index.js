@@ -1,9 +1,10 @@
 import task from './task';
 import layout from './layout';
+import navigator from './navigator';
 import { combineReducers } from 'redux';
 
 const appReducers = combineReducers({
-  task, layout
+  task, layout, navigator
 });
 
 const reducer = (state, action) => {
