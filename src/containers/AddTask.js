@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Animated, View, StyleSheet, Modal } from 'react-native';
 import {connect} from 'react-redux';
-import { Container, Header,Body, Title, Content, Input, Text,Item, Button,} from 'native-base';
+import { Container, Left, Right, Header,Body, Title, Content, Input, Text,Item, Button,} from 'native-base';
 import PropTypes from 'prop-types';
 import {addTask, closeAddTask} from '../actions/task';
+
+import Icon from '@expo/vector-icons/Entypo';
+
 class AddTask extends Component {
   state = {
     slideAnim: new Animated.Value(0),
@@ -30,28 +33,40 @@ class AddTask extends Component {
     });
   }
   addTask = () => {
-    this.props.addTask(this.state.description);
+    let task = {
+      category: this.props.modal.data.category,
+      description: this.state.description
+    };
+    this.props.addTask(task);
     this.props.closeAddTask();
+    this.setState({
+      description: '',
+    });
   }
   render() {
     const {description} = this.state;
     return (
       <Modal
-        visible={this.props.task.getIn(['add','open'])}
+        visible={this.props.task.getIn(['add','modal','open'])}
         animationType={'slide'}
         onRequestClose={() => this.props.closeAddTask()}>
 
-        <Header>
+        <Header style={styles.header}>
+          <Left>
+            <Button transparent onPress={this.props.closeAddTask}>
+              <Icon name='cross' size={24} color='white'/>
+            </Button>
+          </Left>
           <Body>
-            <Title>Add Task</Title>
+            <Title style={{color:'white'}}>Add Task</Title>
           </Body>
+          <Right/>
         </Header>
-        <Button onPress={this.props.closeAddTask}><Text>X</Text></Button>
-        <Content>
+        <Content style={styles.content}>
           <Item regular>
             <Input placeholder='Regular Textbox' value={description} onChangeText={(text)=>this.handleChange(text)}/>
           </Item>
-          <Button bordered onPress={this.addTask}>
+          <Button style={styles.button} bordered onPress={this.addTask}>
             <Text>등록</Text>
           </Button>
         </Content>
@@ -61,6 +76,16 @@ class AddTask extends Component {
 }
 
 var styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#04ACF4',
+  },
+  content: {
+    padding: 20,
+    display: 'flex',
+  },
+  button: {
+    flex: 1,
+  },
   subView: {
     backgroundColor: '#FBFBFB',
     position: 'absolute',
@@ -77,15 +102,13 @@ const mapStateToProps = (state) => {
   return {
     task: state.task,
     layout: state.layout,
+    modal: state.task.getIn(['add','modal']).toJS()
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTask : (description) => {
-      dispatch(addTask(description));
-    },
-    openAddTask: ()=> {
-      dispatch(openAddTask());
+    addTask : (task) => {
+      dispatch(addTask(task));
     },
     closeAddTask: ()=> {
       dispatch(closeAddTask());

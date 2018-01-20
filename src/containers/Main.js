@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Dimensions, View, StatusBar } from "react-native";
 import FooterNavigator from '../navigator/TabNavigator';
+import OverTabNavigator from '../navigator/OverTabNavigator';
 import {Footer} from '../components';
 import {connect} from 'react-redux';
 
@@ -20,7 +21,7 @@ class Main extends Component{
   render(){
     return(
       <View style={{flex: 1}} onLayout={this.onLayout}>
-        <FooterNavigator />
+        <OverTabNavigator />
       </View>
     );
   }
