@@ -1,7 +1,7 @@
 import {TabNavigator} from 'react-navigation';
 import {Footer} from '../components';
 
-import Calendar from '../containers/Calendar';
+import CalendarView from '../containers/CalendarView';
 import TaskList from '../containers/TaskList';
 
 import TaskListNavigator from './TaskListNavigator';
@@ -12,7 +12,7 @@ export default FooterNavigator = TabNavigator({
     screen: TaskListNavigator,
   },
   calendar: {
-    screen: Calendar,
+    screen: CalendarView,
     navigationOptions: {title:'Calendar'},
   }
 }, {

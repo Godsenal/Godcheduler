@@ -11,7 +11,6 @@ export class CategoryTaskList extends Component {
   render() {
     return (
       <View>
-
         <Text>{this.props.navigation.state.category}</Text>
       </View>
     )
