@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Icon from '@expo/vector-icons/Entypo';
 
 //import Icon from 'react-native-vector-icons/dist/Entypo';
 
@@ -30,7 +29,7 @@ export class CategoryList extends Component {
               <TouchableOpacity key={i} onPress={()=>this.props.handleCategoryClick(el.name)} >
                 <View style={[styles.listItem,{backgroundColor:el.color}]}>
                   <Text style={styles.categoryName}>{el.name}</Text>
-                  <Text style={styles.categoryRight}>3  <Icon name='chevron-small-right' /></Text>
+                  <Text style={styles.categoryRight}>3 </Text>
                 </View>
               </TouchableOpacity>
             )

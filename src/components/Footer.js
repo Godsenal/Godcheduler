@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Text, View, StyleSheet, TouchableHighlight, TouchableOpacity, Dimensions } from 'react-native';
-import Icon from '@expo/vector-icons/Entypo';
 import { openAddTask, closeAddTask } from '../actions/task';
 
 const iconList = {

@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 
 export class CategoryTaskList extends Component {
   static propTypes = {
-    prop: PropTypes
+    category: PropTypes.string.isRequired,
   }
 
   render() {
     return (
       <View>
 
-        <Text>{this.props.navigation.state.category}</Text>
+        <Text>{this.props.category}</Text>
       </View>
     )
   }
