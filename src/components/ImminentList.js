@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
 
-class ImminentTasks extends Component {
+class ImminentList extends Component {
   state = {
     data:[
       {color: '#13CE66',description:'김범준 밥주기',date: '1일 전'},
@@ -77,4 +76,4 @@ const styles = StyleSheet.create({
     fontSize : 10,
   }
 })
-export default ImminentTasks;
+export default ImminentList;

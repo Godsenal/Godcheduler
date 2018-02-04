@@ -1,3 +1,5 @@
+export const ACCOUNT_LOGIN = 'ACCOUNT_LOGIN';
+
 export const TASK_ADD = 'TASK_ADD';
 export const TASK_ADD_OPEN = 'TASK_ADD_OPEN';
 export const TASK_ADD_CLOSE = 'TASK_ADD_CLOSE';

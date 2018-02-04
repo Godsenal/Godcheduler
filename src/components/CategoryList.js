@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 //import Icon from 'react-native-vector-icons/dist/Entypo';
 
-export class CategoryList extends Component {
+class CategoryList extends Component {
   state = {
     categories: [
       {name:'Kim BumJune',color:'#13CE66'},

@@ -1,9 +1,10 @@
 import task from './task';
 import layout from './layout';
+import account from './account';
 import { combineReducers } from 'redux';
 
 const appReducers = combineReducers({
-  task, layout
+  task, layout, account
 });
 
 const reducer = (state, action) => {
