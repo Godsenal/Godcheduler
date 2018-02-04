@@ -35,15 +35,19 @@ class App extends Component {
 	constructor(props) {
     super(props);
     this._populateIcons().then(() => {
-      /* redux의 state가 바뀔 때 마다 onStoreUpdate를 event handler로 사용 */
-      store.subscribe(this.onStoreUpdate);
-      this.startApp(store.getState().account.get('isLoggedIn'));
+      /* 
+        redux의 state가 바뀔 때 마다 onStoreUpdate를 event handler로 사용 
+        store.subscribe(this.onStoreUpdate);
+      */
+      this.startApp(true); //store.getState().account.get('isLoggedIn')
+      
     }).catch((error) => {
       console.error(error);
     });
     
   }
   
+  /*
   onStoreUpdate = () => {
     let {account} = store.getState();
 
@@ -52,7 +56,7 @@ class App extends Component {
       this.startApp(account.get('isLoggedIn'));
     }
   }
-  /* react-vector-icon을 로딩시켜주는 작업. 이미지로 뽑을지 이걸로 할지 결정.
+   react-vector-icon을 로딩시켜주는 작업. 이미지로 뽑을지 이걸로 할지 결정.
     https://github.com/wix/react-native-navigation/issues/43#issuecomment-223907515
   */
   _populateIcons = function () {
