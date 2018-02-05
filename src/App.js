@@ -1,29 +1,16 @@
-import React, { Component } from "react";
-import { StyleSheet, Dimensions, View, Text, Platform } from "react-native";
+import React, { Component } from 'react';
+import { Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
 import { registerScreens } from './screens';
 import { store } from './stores';
-
 import { color } from './config';
+
 const Icon = require('react-native-vector-icons/Entypo');
 
-var listIcon;
-var calendarIcon;
-
-const tabs = [{
-  label: 'TaskList',
-  screen: 'main.TaskList',
-  title: 'TaskList',
-  icon: listIcon,
-}, {
-  label: 'Calendar',
-  screen: 'main.Calendar',
-  title: 'Calendar',
-  icon: calendarIcon,
-}];
-
+let listIcon;
+let calendarIcon;
 
 registerScreens(store, Provider);
 
@@ -33,21 +20,19 @@ registerScreens(store, Provider);
   이것좀 참고함.
 */
 class App extends Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this._populateIcons().then(() => {
-      /* 
-        redux의 state가 바뀔 때 마다 onStoreUpdate를 event handler로 사용 
+      /*
+        redux의 state가 바뀔 때 마다 onStoreUpdate를 event handler로 사용
         store.subscribe(this.onStoreUpdate);
       */
-      this.startApp(true); //store.getState().account.get('isLoggedIn')
-      
+      this.isLoggedIn = true;
+      this.startApp(); // store.getState().account.get('isLoggedIn')
     }).catch((error) => {
       console.error(error);
     });
-    
   }
-  
   /*
   onStoreUpdate = () => {
     let {account} = store.getState();
@@ -61,7 +46,7 @@ class App extends Component {
     https://github.com/wix/react-native-navigation/issues/43#issuecomment-223907515
   */
   _populateIcons = function () {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       Promise.all(
         [
           Icon.getImageSource('list', 20),
@@ -77,11 +62,12 @@ class App extends Component {
       }).done();
     });
   };
-	startApp(isLoggedIn) {
-    /* Login 여부에 따라 화면 결정 */
-    if(isLoggedIn){
+  startApp() {
+    const { isLoggedIn } = this;
+  /* Login 여부에 따라 화면 결정 */
+    if (isLoggedIn) {
       Navigation.startTabBasedApp({
-        tabs : [{
+        tabs: [{
           label: 'TaskList',
           screen: 'main.TaskList',
           title: 'TaskList',
@@ -92,7 +78,7 @@ class App extends Component {
           title: 'Calendar',
           icon: calendarIcon,
         }],
-        animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade',
+        animationType: 'none',
         tabsStyle: {
           tabBarBackgroundColor: color.lightgray,
           tabBarButtonColor: '#A5A9AE',
@@ -110,22 +96,18 @@ class App extends Component {
           statusBarColor: '#002b4c',
           tabFontFamily: 'BioRhyme-Bold',
         },
-        animationType: 'none'
       });
-    }
-    else{
+    } else {
       Navigation.startSingleScreenApp({
         screen: {
           screen: 'main.Login', // unique ID registered with Navigation.registerScreen
           title: 'Welcome', // title of the screen as appears in the nav bar (optional)
           navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-          navigatorButtons: {} // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+          navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
         },
       });
     }
-		
   }
-  
 }
 
 export default App;

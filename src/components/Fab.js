@@ -1,25 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
-export default class Fab extends Component {
-  static propTypes = {
-    position: PropTypes.string.isRequired,
-    callback: PropTypes.func.isRequired,
-  }
-  render() {
-    const {position, callback} = this.props;
-    return (
-      <TouchableOpacity
-        style={[styles.fab,position=='right'?{right: 10}:{left: 10}]}
-        onPress={callback}>
-        {this.props.children}
-      </TouchableOpacity>
-    )
-  }
-}
-
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     backgroundColor: '#04ACF4',
@@ -32,3 +15,21 @@ var styles = StyleSheet.create({
     zIndex: 101,
   },
 });
+
+const Fab = ({ position, callback, children }) => (
+  <TouchableOpacity
+    style={[styles.fab, position === 'right' ? { right: 10 } : { left: 10 }]}
+    onPress={callback}
+  >
+    {children}
+  </TouchableOpacity>
+);
+
+Fab.propTypes = {
+  position: PropTypes.string.isRequired,
+  callback: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
+};
+
+export default Fab;
+

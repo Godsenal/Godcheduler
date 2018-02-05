@@ -8,8 +8,17 @@
       "react-native"
   ],
   "rules": {
-      "no-underscore-dangle": "off",
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "global-require": "off",
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-underscore-dangle": "off",
+    "prefer-promise-reject-errors": "off",
+    "no-nested-ternary": "off",
+    "react/no-multi-comp": "off"
   },
   "settings": {
       "import/resolver": {
@@ -19,3 +28,4 @@
       }
   }
 }
+

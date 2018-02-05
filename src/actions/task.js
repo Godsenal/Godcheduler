@@ -4,24 +4,24 @@ import {
   TASK_ADD_CLOSE,
 } from './ActionTypes';
 
-export function addTask(description){
-  let task = {
+export function addTask(description) {
+  const task = {
     description,
   };
   return {
     type: TASK_ADD,
-    task
-  }
+    task,
+  };
 }
 
-export function openAddTask(){
+export function openAddTask() {
   return {
     type: TASK_ADD_OPEN,
-  }
+  };
 }
 
-export function closeAddTask(){
+export function closeAddTask() {
   return {
     type: TASK_ADD_CLOSE,
-  }
+  };
 }

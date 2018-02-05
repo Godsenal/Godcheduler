@@ -1,11 +1,11 @@
 import {
-  LAYOUT_CHANGE
+  LAYOUT_CHANGE,
 } from './ActionTypes';
 
-export function changeLayout(width, height){
+export function changeLayout( width, height ) {
   return {
     type: LAYOUT_CHANGE,
     width,
     height,
-  }
+  };
 }

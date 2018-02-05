@@ -1,3 +1,3 @@
 import color from './color';
 
-export {color};
+export { color };

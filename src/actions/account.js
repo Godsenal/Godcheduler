@@ -1,9 +1,9 @@
 import {
-  ACCOUNT_LOGIN
+  ACCOUNT_LOGIN,
 } from './ActionTypes';
 
-export function login(){
+export function login() {
   return {
-    type: ACCOUNT_LOGIN
-  }
+    type: ACCOUNT_LOGIN,
+  };
 }

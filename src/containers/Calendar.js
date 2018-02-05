@@ -1,21 +1,9 @@
-import React, { Component } from 'react';
-import {Container, Text, Header, Body, Title} from 'native-base';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Container, Text } from 'native-base';
 
-class Calendar extends Component {
-  static propTypes = {
-
-  }
-
-  render() {
-    return (
-      <Container>
-        <Text>
-          I'm Calander
-        </Text>
-      </Container>
-    )
-  }
-}
-
-export default Calendar
+const Calendar = () => (
+  <Container>
+    <Text>Im Calander</Text>
+  </Container>
+);
+export default Calendar;
