@@ -17,7 +17,7 @@ class TaskList extends Component {
   handleAddTask =() => {
     this.props.navigator.showModal({
       screen: 'modal.AddTask',
-      title: 'Add Task'
+      title: 'Add Task',
     })
   }
   render() {

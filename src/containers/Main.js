@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, Dimensions, View, StatusBar } from "react-native";
 import {connect} from 'react-redux';
 
-
 import {changeLayout} from '../actions/layout';
 
 class Main extends Component{

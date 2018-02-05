@@ -6,6 +6,7 @@ import { Navigation } from 'react-native-navigation';
 import { registerScreens } from './screens';
 import { store } from './stores';
 
+import { color } from './config';
 const Icon = require('react-native-vector-icons/Entypo');
 
 var listIcon;
@@ -93,19 +94,19 @@ class App extends Component {
         }],
         animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade',
         tabsStyle: {
-          tabBarBackgroundColor: '#FBFBFB',
+          tabBarBackgroundColor: color.lightgray,
           tabBarButtonColor: '#A5A9AE',
-          tabBarSelectedButtonColor: '#04ACF4',
+          tabBarSelectedButtonColor: color.skyblue,
           tabFontFamily: 'BioRhyme-Bold',
         },
         appStyle: {
-          tabBarBackgroundColor: '#FBFBFB',
+          tabBarBackgroundColor: color.lightgray,
           navBarButtonColor: '#04ACF4',
           tabBarButtonColor: '#ffffff',
           navBarTextColor: '#04ACF4',
           tabBarSelectedButtonColor: '#ff505c',
           navigationBarColor: '#04ACF4',
-          navBarBackgroundColor: '#FBFBFB',
+          navBarBackgroundColor: color.lightgray,
           statusBarColor: '#002b4c',
           tabFontFamily: 'BioRhyme-Bold',
         },
