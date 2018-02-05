@@ -3,8 +3,8 @@ import Icon from 'react-native-vector-icons/Foundation';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Text } from 'native-base';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { Container, Content, Text } from 'native-base';
+import { StyleSheet } from 'react-native';
 
 import { ImminentList, CategoryList, Fab } from '../components';
 
@@ -17,8 +17,18 @@ const styles = StyleSheet.create({
 
 class TaskList extends Component {
   handleCategoryClick = (category) => {
-    
-  } 
+    this.props.navigator.push({
+      screen: 'stack.ListInCategory',
+      animated: true,
+      animationType: 'slide-horizontal',
+      title: category.name,
+      navigatorStyle: {
+        navBarBackgroundColor: category.color,
+        navBarTextColor: '#FBFBFB',
+        navBarButtonColor: '#FBFBFB',
+      },
+    });
+  }
 
   handleAddTask =() => {
     this.props.navigator.showModal({
@@ -29,17 +39,17 @@ class TaskList extends Component {
   render() {
     const { list, layout } = this.props;
     return (
-      <View style={styles.container}>
-        <ScrollView>
+      <Container style={styles.container}>
+        <Content>
           <ImminentList />
-          <Text style={{marginTop: 20, marginLeft: 20, fontSize: 12}}>Categories</Text>
-          <CategoryList handleCategoryClick={this.handleCategoryClick}/>
-        </ScrollView>
+          <Text style={{ marginTop: 20, marginLeft: 20, fontSize: 12 }}>Categories</Text>
+          <CategoryList handleCategoryClick={this.handleCategoryClick} />
+        </Content>
         <Fab position="right" callback={this.handleAddTask}>
           <Icon name="pencil" color="#FFFFFF" size={20} />
         </Fab>
-      </View>
-    )
+      </Container>
+    );
   }
 }
 

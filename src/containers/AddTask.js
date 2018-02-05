@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import IoIcon from 'react-native-vector-icons/Ionicons';
-import { addTask, closeAddTask } from '../actions/task';
+import { addTask } from '../actions/task';
 import { color } from '../config';
 
 const styles = StyleSheet.create({
@@ -116,7 +116,6 @@ class AddTask extends Component {
   }
   addTask = () => {
     this.props.addTask(this.state.description);
-    this.props.closeAddTask();
   }
   render() {
     const { categories, description } = this.state;

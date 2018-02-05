@@ -47,7 +47,7 @@ class CategoryList extends Component {
         {
           categories.map((el, i) => {
             return (
-              <TouchableOpacity key={i} onPress={() => this.props.handleCategoryClick(el.name)} >
+              <TouchableOpacity key={i} onPress={() => this.props.handleCategoryClick(el)} >
                 <View style={[styles.listItem, { backgroundColor: el.color }]}>
                   <Text style={styles.categoryName}>{el.name}</Text>
                   <Text style={styles.categoryRight}>3 </Text>
