@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 
-
-const DOUBLE_PRESS_DELAY = 400;
+import { DoubleTapWrapper } from '../components';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,42 +23,27 @@ export default class ListInCategory extends Component {
   }
   state = {
     data: Array(50).fill(0).map((item, i) => (
-      { text: `Row ${i + 1}`, id: i }
+      { text: `Row ${i + 1}`, id: `${i}` }
     )),
   }
-  detectDoubleTap = (id) => {
-    const time = new Date().getTime();
-    const delta = this.lastTap[id] ? (time - this.lastTap[id]) : -1;
-
-    if (delta > 0 && delta < DOUBLE_PRESS_DELAY) {
-      return true;
-    }
-    this.lastTap[id] = time;
-    return false;
-  };
-  _onPress = (id) => {
-    const isDoubleTap = this.detectDoubleTap(id);
-
-    if (isDoubleTap) {
-      this.setState({
-        data: this.state.data.filter(item => (
-          item.id !== id
-        )),
-      });
-    }
-  };
+  deleteItem = (id) => {
+    this.setState({
+      data: this.state.data.filter(item => (
+        item.id !== id
+      )),
+    });
+  }
   _renderItem = ({ item }) => (
-    <TouchableOpacity key={item.id} style={styles.item} onPress={() => this._onPress(item.id)}>
+    <DoubleTapWrapper key={item.id} id={item.id} style={styles.item} onDoubleTap={this.deleteItem}>
       <View>
         <Text style={{ color: 'black' }}>
           {item.text}
         </Text>
       </View>
-    </TouchableOpacity>
+    </DoubleTapWrapper>
   );
   render() {
     const { data } = this.state;
-    console.log(data);
     return (
       <View style={styles.container}>
         <FlatList
