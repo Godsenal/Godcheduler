@@ -1,23 +1,22 @@
-import React, { Component } from "react";
-import { StyleSheet, Dimensions, View, StatusBar } from "react-native";
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { StyleSheet, Dimensions, View, StatusBar } from 'react-native';
+import { connect } from 'react-redux';
 
-import {changeLayout} from '../actions/layout';
+import { changeLayout } from '../actions/layout';
 
-class Main extends Component{
+class Main extends Component {
   componentDidMount = () => {
-    const {width, height} = Dimensions.get('window');
+    const { width, height } = Dimensions.get('window');
     this.props.changeLayout(width, height);
   }
   
   onLayout = () => {
-    const {width, height} = Dimensions.get('window');
+    const { width, height } = Dimensions.get('window');
     this.props.changeLayout(width, height);
   }
-  render(){
-    return(
-      <View style={{flex: 1}} onLayout={this.onLayout}>
-      </View>
+  render() {
+    return (
+      <View style={{ flex: 1 }} onLayout={this.onLayout} />
     );
   }
 }
@@ -30,7 +29,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeLayout : (width, height) => {
+    changeLayout: (width, height) => {
       dispatch(changeLayout(width,height))
     },
   }

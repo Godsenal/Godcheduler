@@ -42,8 +42,8 @@ class App extends Component {
       this.startApp(account.get('isLoggedIn'));
     }
   }
-   react-vector-icon을 로딩시켜주는 작업. 이미지로 뽑을지 이걸로 할지 결정.
-    https://github.com/wix/react-native-navigation/issues/43#issuecomment-223907515
+  react-vector-icon을 로딩시켜주는 작업. 이미지로 뽑을지 이걸로 할지 결정.
+  https://github.com/wix/react-native-navigation/issues/43#issuecomment-223907515
   */
   _populateIcons = function () {
     return new Promise((resolve, reject) => {
@@ -64,7 +64,7 @@ class App extends Component {
   };
   startApp() {
     const { isLoggedIn } = this;
-  /* Login 여부에 따라 화면 결정 */
+    /* Login 여부에 따라 화면 결정 */
     if (isLoggedIn) {
       Navigation.startTabBasedApp({
         tabs: [{
@@ -74,7 +74,7 @@ class App extends Component {
           icon: listIcon,
         }, {
           label: 'Calendar',
-          screen: 'main.Calendar',
+          screen: 'main.CalendarView',
           title: 'Calendar',
           icon: calendarIcon,
         }],
@@ -88,9 +88,9 @@ class App extends Component {
         appStyle: {
           tabBarBackgroundColor: color.lightgray,
           navBarButtonColor: '#04ACF4',
-          tabBarButtonColor: '#ffffff',
+          tabBarButtonColor: '#A5A9AE',
           navBarTextColor: '#04ACF4',
-          tabBarSelectedButtonColor: '#ff505c',
+          tabBarSelectedButtonColor: color.skyblue,
           navigationBarColor: '#04ACF4',
           navBarBackgroundColor: color.lightgray,
           statusBarColor: '#002b4c',
