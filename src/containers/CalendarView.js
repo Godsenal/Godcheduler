@@ -5,48 +5,43 @@ import moment from 'moment';
 
 class CalendarView extends React.Component {
   state = {
-    today: '',
-    dateData: {
+    scheduleData: {
+      '2018-02-12': { dots: [{ key: 'hoho', color: 'red', selectedColor: 'red' }, { key: 'notads', color: 'blue' }] },
     },
-    selectedDate: {},
   };
-  componentWillMount() {
+
+  componentDidMount() {
     this.changeSelectedDay(moment().format('YYYY-MM-DD'));
-    this.setState({
-      dateData: {
-        '2018-2-12': { dots: [this.categoryList.gcp], selected: true },
-        '2018-2-24': { dots: [this.categoryList.gcp, this.categoryList.study] },
-      },
-    });
-    console.log(this.state);
   }
-  categoryList = {
-    study: {
-      key: 'study',
-      color: 'red',
-    },
-    gcp: {
-      key: 'gcp',
-      color: 'blue',
-    },
-  }
+
   changeSelectedDay = (date) => {
     this.setState({
-      selectedDate: {
-        [date]: { selected: true },
+      selected: date.dateString,
+    });
+    this.makeCalendarData(this.state.selected);
+    console.log(this.state);
+  }
+
+  makeCalendarData = (day) => {
+    this.setState({
+      calData: {
+        ...this.state.scheduleData,
+        [day]: Object.assign({}, this.state.scheduleData[day], { selected: true }),
       },
     });
   }
+
   render() {
     return (
       <Container style={{ display: 'flex' }}>
-        <View style={{ flex: 2 }}>
+        <View style={{ flex: 1.8 }}>
           <Calendar
-            current={this.state.selectedDate}
-            markedDates={this.state.selectedDate}
+            displayLodingIndicator
+            markingType={'multi-dot'}
             onDayPress={(day) => {
-              this.changeSelectedDay(day.dateString);
+              this.changeSelectedDay(day);
             }}
+            markedDates={this.state.calData}
           />
         </View>
         {/* 하단 카테고리 목록 */}
