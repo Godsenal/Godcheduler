@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
+import { AnimatedRow } from './';
 
 const DOUBLE_PRESS_DELAY = 400;
 
@@ -10,37 +11,60 @@ export default class DoubleTapWrapper extends React.PureComponent {
     children: PropTypes.element.isRequired,
     onPress: PropTypes.func,
     onDoubleTap: PropTypes.func.isRequired,
+    animation: PropTypes.bool.isRequired,
+    onAnimationEnd: PropTypes.func.isRequired,
+    innerStyle: PropTypes.node.isRequired,
+    animationComponent: PropTypes.element,
   }
   static defaultProps = {
     onPress: () => {},
+    animationComponent: null,
   }
   constructor() {
     super();
-    this.lastTap = {};
+    this.lastTap = 0;
+    this.isRemoving = false;
   }
-  _onPress = (id) => {
-    const isDoubleTap = this.detectDoubleTap(id);
-
+  _onPress = () => {
+    const isDoubleTap = this.detectDoubleTap();
     this.props.onPress(); // 필요할까봐 만듬
     if (isDoubleTap) {
-      this.props.onDoubleTap(id);
+      this.props.onDoubleTap();
+      this.isRemoving = true;
     }
   };
-  detectDoubleTap = (id) => {
+  detectDoubleTap = () => {
     const time = new Date().getTime();
-    const delta = this.lastTap[id] ? (time - this.lastTap[id]) : -1;
+    const delta = time - this.lastTap;
 
-    if (delta > 0 && delta < DOUBLE_PRESS_DELAY) {
+    if (delta < DOUBLE_PRESS_DELAY) {
       return true;
     }
-    this.lastTap[id] = time;
+    this.lastTap = time;
     return false;
   };
   render() {
-    const { id } = this.props;
+    const {
+      animation,
+      animationComponent,
+      children,
+      innerStyle,
+      onAnimationEnd,
+    } = this.props;
+    const innerView = animation ?
+      (
+        <AnimatedRow
+          style={innerStyle}
+          remove={this.isRemoving}
+          onRemove={onAnimationEnd}
+        >
+          {!this.isRemoving ? children : animationComponent || children}
+        </AnimatedRow>
+      ) :
+      children;
     return (
-      <TouchableOpacity {...this.props} onPress={() => this._onPress(id)}>
-        {this.props.children}
+      <TouchableOpacity {...this.props} onPress={this._onPress} disabled={this.isRemoving}>
+        {innerView}
       </TouchableOpacity>
     );
   }

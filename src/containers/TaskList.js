@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Container, Content, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
 
+import StackHOC from './StackHOC';
 import { ImminentList, CategoryList, Fab } from '../components';
 
 const styles = StyleSheet.create({
@@ -16,8 +17,9 @@ const styles = StyleSheet.create({
 });
 
 class TaskList extends Component {
+  /* 안드에서 더블 탭 하면 두번 열림... 수정 필요 */
   handleCategoryClick = (category) => {
-    this.props.navigator.push({
+    this.props.push({
       screen: 'stack.ListInCategory',
       animated: true,
       animationType: 'slide-horizontal',
@@ -58,5 +60,5 @@ const mapStateToProps = state => ({
   layout: state.layout,
 });
 
-export default connect(mapStateToProps)(TaskList);
+export default StackHOC(connect(mapStateToProps)(TaskList));
 

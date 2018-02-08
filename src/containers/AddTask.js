@@ -121,8 +121,8 @@ class AddTask extends Component {
     const { categories, description } = this.state;
     const currentCategory = this.props.category ? this.props.category : categories[0];
     return (
-      <Container>
-        <Content>
+      <Container style={{ flex: 1 }}>
+        <Content style={{ flex: 1, backgroundColor: 'white' }}>
           <View style={styles.formList}>
             <Text>설명</Text>
             <TextInput
