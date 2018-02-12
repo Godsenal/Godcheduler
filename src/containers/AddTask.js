@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  TextInput } from 'react-native';
+  TextInput,
+  Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { Container, Content, Footer, FooterTab, Input, Text, Item, Button } from 'native-base';
 import PropTypes from 'prop-types';
@@ -67,9 +68,9 @@ class AddTask extends Component {
   static navigatorButtons = {
     leftButtons: [
       {
-        id: 'cancel', // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
-        disableIconTint: true, // optional, by default the image colors are overridden and tinted to navBarButtonColor, set to true to keep the original image colors
-        showAsAction: 'ifRoom', // optional, Android only. Control how the button is displayed in the Toolbar. Accepted valued: 'ifRoom' (default) - Show this item as a button in an Action Bar if the system decides there is room for it. 'always' - Always show this item as a button in an Action Bar. 'withText' - When this item is in the action bar, always show it with a text label even if it also has an icon specified. 'never' - Never show this item as a button in an Action Bar.
+        id: 'cancel',
+        disableIconTint: true,
+        showAsAction: 'ifRoom',
         buttonColor: color.skyblue,
         systemItem: 'stop',
       },
@@ -104,6 +105,7 @@ class AddTask extends Component {
   }
   onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
     if (event.type === 'NavBarButtonPress') { // this is the event type for button presses
+      Keyboard.dismiss();
       this.props.navigator.dismissModal({
         animationType: 'slide-down', // 'none' / 'slide-down' , dismiss animation for the modal (optional, default 'slide-down')
       });

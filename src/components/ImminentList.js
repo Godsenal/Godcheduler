@@ -42,33 +42,53 @@ const styles = StyleSheet.create({
 class ImminentList extends Component {
   state = {
     data: [
-      { color: '#13CE66', description: '김범준 밥주기', date: '1일 전' },
-      { color: '#F2FF00', description: '김범준과 재미있는 프로그래밍', date: '3일 전' },
-      { color: '#FA687F', description: '은학이 따라잡기', date: '4일 전' },
-      { color: '#4387D6', description: '이마 때리기', date: '5일 전' },
+      {
+        color: '#13CE66',
+        description: '김범준 밥주기',
+        date: '1일 전',
+        id: '1',
+      },
+      {
+        color: '#F2FF00',
+        description:
+        '김범준과 재미있는 프로그래밍',
+        date:
+        '3일 전',
+        id: '2',
+      },
+      {
+        color: '#FA687F',
+        description: '은학이 따라잡기',
+        date: '4일 전',
+        id: '3',
+      },
+      {
+        color: '#4387D6',
+        description: '이마 때리기',
+        date: '5일 전',
+        id: '4',
+      },
     ],
   }
   render() {
     const { data } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={{color: '#FBFBFB'}} >Imminent Tasks</Text>
+        <Text style={{ color: '#FBFBFB' }} >Imminent Tasks</Text>
         <View style={styles.listContainer}>
           {
-            data.map((el, i) =>{
-              return (
-                <View key={i} style={styles.listItem}>
-                  <View style={[styles.listCategory, { backgroundColor: el.color }]} />
-                  <Text style={styles.listText}>
-                    {
-                      el.description.length < 20 ?
-                        el.description : `${el.description.substr(0, 20)} ...`
-                    }
-                  </Text>
-                  <Text style={styles.listDate}>{el.date}</Text>
-                </View>
-              );
-            })
+            data.map(el => (
+              <View key={el.id} style={styles.listItem}>
+                <View style={[styles.listCategory, { backgroundColor: el.color }]} />
+                <Text style={styles.listText}>
+                  {
+                    el.description.length < 20 ?
+                      el.description : `${el.description.substr(0, 20)} ...`
+                  }
+                </Text>
+                <Text style={styles.listDate}>{el.date}</Text>
+              </View>
+            ))
           }
         </View>
       </View>

@@ -29,15 +29,15 @@ class CategoryList extends Component {
   }
   state = {
     categories: [
-      { name: 'Kim BumJune', color: '#13CE66' },
-      { name: 'Game', color: '#4387D6' },
-      { name: 'Eunhack', color: '#FA687F' },
-      { name: 'Eunhack', color: '#FA687F' },
-      { name: 'Eunhack', color: '#FA687F' },
-      { name: 'Eunhack', color: '#FA687F' },
-      { name: 'Eunhack', color: '#FA687F' },
-      { name: 'Eunhack', color: '#FA687F' },
-      { name: 'Eunhack', color: '#FA687F' },
+      { name: 'Kim BumJune', color: '#13CE66', id: '1' },
+      { name: 'Game', color: '#4387D6', id: '2' },
+      { name: 'Eunhack', color: '#FA687F', id: '3' },
+      { name: 'Eunhack', color: '#FA687F', id: '4' },
+      { name: 'Eunhack', color: '#FA687F', id: '5' },
+      { name: 'Eunhack', color: '#FA687F', id: '6' },
+      { name: 'Eunhack', color: '#FA687F', id: '7' },
+      { name: 'Eunhack', color: '#FA687F', id: '8' },
+      { name: 'Eunhack', color: '#FA687F', id: '9' },
     ],
   }
   render() {
@@ -45,16 +45,14 @@ class CategoryList extends Component {
     return (
       <View style={styles.container}>
         {
-          categories.map((el, i) => {
-            return (
-              <TouchableOpacity key={i} onPress={() => this.props.handleCategoryClick(el)} >
-                <View style={[styles.listItem, { backgroundColor: el.color }]}>
-                  <Text style={styles.categoryName}>{el.name}</Text>
-                  <Text style={styles.categoryRight}>3 </Text>
-                </View>
-              </TouchableOpacity>
-            );
-          })
+          categories.map(el => (
+            <TouchableOpacity key={el.id} onPress={() => this.props.handleCategoryClick(el)} >
+              <View style={[styles.listItem, { backgroundColor: el.color }]}>
+                <Text style={styles.categoryName}>{el.name}</Text>
+                <Text style={styles.categoryRight}>3 </Text>
+              </View>
+            </TouchableOpacity>
+          ))
         }
       </View>
     );

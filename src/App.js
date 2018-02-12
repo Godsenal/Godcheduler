@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { Platform } from 'react-native';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 
@@ -19,7 +18,7 @@ registerScreens(store, Provider);
   https://github.com/wix/react-native-navigation/blob/master/old-example-redux/src/app.js
   이것좀 참고함.
 */
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this._populateIcons().then(() => {
@@ -45,16 +44,13 @@ class App extends Component {
   react-vector-icon을 로딩시켜주는 작업. 이미지로 뽑을지 이걸로 할지 결정.
   https://github.com/wix/react-native-navigation/issues/43#issuecomment-223907515
   */
-  _populateIcons = function () {
+  _populateIcons = function populate() {
     return new Promise((resolve, reject) => {
-      Promise.all(
-        [
-          Icon.getImageSource('list', 20),
-          Icon.getImageSource('calendar', 20),
-        ]
-      ).then((values) => {
-        listIcon = values[0];
-        calendarIcon = values[1];
+      Promise.all([
+        Icon.getImageSource('list', 20),
+        Icon.getImageSource('calendar', 20),
+      ]).then((values) => {
+        [listIcon, calendarIcon] = values;
         resolve(true);
       }).catch((error) => {
         console.log(error);
@@ -84,17 +80,19 @@ class App extends Component {
           tabBarButtonColor: '#A5A9AE',
           tabBarSelectedButtonColor: color.skyblue,
           tabFontFamily: 'BioRhyme-Bold',
+          forceTitlesDisplay: true,
         },
         appStyle: {
           tabBarBackgroundColor: color.lightgray,
-          navBarButtonColor: '#04ACF4',
           tabBarButtonColor: '#A5A9AE',
-          navBarTextColor: '#04ACF4',
+          navBarTextColor: color.lightgray,
+          navBarButtonColor: color.lightgray,
           tabBarSelectedButtonColor: color.skyblue,
           navigationBarColor: '#04ACF4',
-          navBarBackgroundColor: color.lightgray,
-          statusBarColor: '#002b4c',
+          navBarBackgroundColor: color.skyblue,
+          statusBarTextColorScheme: 'light',
           tabFontFamily: 'BioRhyme-Bold',
+          keepStyleAcrossPush: false,
         },
       });
     } else {
@@ -102,8 +100,8 @@ class App extends Component {
         screen: {
           screen: 'main.Login', // unique ID registered with Navigation.registerScreen
           title: 'Welcome', // title of the screen as appears in the nav bar (optional)
-          navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-          navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
+          navigatorStyle: {}, // override the navigator style for the screen
+          navigatorButtons: {}, // override the nav buttons for the screen
         },
       });
     }

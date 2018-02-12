@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native';
 
 import StackHOC from './StackHOC';
 import { ImminentList, CategoryList, Fab } from '../components';
+import { color } from '../config';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,7 +18,6 @@ const styles = StyleSheet.create({
 });
 
 class TaskList extends Component {
-  /* 안드에서 더블 탭 하면 두번 열림... 수정 필요 */
   handleCategoryClick = (category) => {
     this.props.push({
       screen: 'stack.ListInCategory',
@@ -26,8 +26,8 @@ class TaskList extends Component {
       title: category.name,
       navigatorStyle: {
         navBarBackgroundColor: category.color,
-        navBarTextColor: '#FBFBFB',
-        navBarButtonColor: '#FBFBFB',
+        navBarTextColor: color.lightgray,
+        navBarButtonColor: color.lightgray,
       },
     });
   }

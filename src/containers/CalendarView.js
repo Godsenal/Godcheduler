@@ -15,15 +15,13 @@ class CalendarView extends React.Component {
   }
 
   changeSelectedDay = (date) => {
-    this.setState({
-      selected: date.dateString,
-    });
-    this.makeCalendarData(this.state.selected);
+    this.makeCalendarData(date.dateString);
     console.log(this.state);
   }
 
   makeCalendarData = (day) => {
     this.setState({
+      selected: day,
       calData: {
         ...this.state.scheduleData,
         [day]: Object.assign({}, this.state.scheduleData[day], { selected: true }),
@@ -37,7 +35,7 @@ class CalendarView extends React.Component {
         <View style={{ flex: 1.8 }}>
           <Calendar
             displayLodingIndicator
-            markingType={'multi-dot'}
+            markingType="multi-dot"
             onDayPress={(day) => {
               this.changeSelectedDay(day);
             }}

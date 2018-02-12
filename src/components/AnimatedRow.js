@@ -41,11 +41,11 @@ export default class AnimatedRow extends Component {
     const { opacity, backgroundColor } = this.state;
     const backgroundColorAnim = backgroundColor.interpolate({
       inputRange: [0, 1],
-      outputRange: ['white', '#23BD7E'],
+      outputRange: ['transparent', '#23BD7E'],
     });
     return (
       <Animated.View
-        style={[style, { opacity, backgroundColor: backgroundColorAnim }]}
+        style={[style, { flex: 1, opacity, backgroundColor: backgroundColorAnim }]}
       >
         {this.props.children}
       </Animated.View>
