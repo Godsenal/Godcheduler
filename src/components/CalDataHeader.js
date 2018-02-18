@@ -3,6 +3,10 @@ import { StyleSheet, Text } from 'react-native';
 import { View } from 'native-base';
 
 const styles = StyleSheet.create({
+  outSide: {
+    paddingLeft: 3,
+    paddingRight: 3,
+  },
   textWrapper: {
     backgroundColor: '#cfd3d0',
     borderWidth: 5,
@@ -23,8 +27,10 @@ const CalDataHeader = (props) => {
   } = props;
 
   return (
-    <View style={styles.textWrapper}>
-      <Text style={styles.text}>{date}</Text>
+    <View style={styles.outSide}>
+      <View style={styles.textWrapper}>
+        <Text style={styles.text}>{date}</Text>
+      </View>
     </View>
   );
 };

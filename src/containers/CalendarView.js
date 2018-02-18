@@ -5,6 +5,7 @@ import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 import CalDataHeader from '../components/CalDataHeader';
 import CalDataBody from '../components/CalDataBody';
+import CalDataFooter from '../components/CalDataFooter';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +50,29 @@ class CalendarView extends React.Component {
         },
       },
       ],
-    }],
+    },
+    {
+      date: '2018-02-17',
+      data: [{
+        time: '20:21',
+        name: '어디로 갈까요',
+        describe: '어디로 갈지 잘 모르겠어요',
+        category: {
+          key: 'study',
+          color: 'red',
+        },
+      }, {
+        time: '17:32',
+        name: '나는 아무것도 몰라요',
+        describe: '죽기',
+        category: {
+          key: 'GCP',
+          color: 'blue',
+        },
+      },
+      ],
+    },
+    ],
     scheduleData: {
       '2018-02-12': { dots: [{ key: 'hoho', color: 'red', selectedColor: 'red' }, { key: 'notads', color: 'blue' }] },
     },
@@ -66,17 +89,30 @@ class CalendarView extends React.Component {
   }
 
   makeCalendarData = (day) => {
-    this.setState({
-      selected: day,
-      calData: {
-        ...this.state.scheduleData,
-        [day]: Object.assign({}, this.state.scheduleData[day], { selected: true }),
-      },
+    const itemData = {};
+    this.state.userSchedule.map((value) => {
+      Object.assign(itemData, { [value.date]: { dots: value.data.map(({ category }) => category) } });
+    });
+
+    this.setState((prevState) => {
+      return {
+        selected: day,
+        calData: {
+          ...this.state.scheduleData,
+          ...itemData,
+          [day]: Object.assign({}, prevState.calData[day], { selected: true }),
+        },
+      };
     });
   }
 
   _renderItem = ({ item }) => (
-    <CalDataBody time={item.time} name={item.name} describe={item.describe} category={item.category} />
+    <CalDataBody
+      time={item.time}
+      name={item.name}
+      describe={item.describe}
+      category={item.category}
+    />
   )
 
   _renderSectionHeader = ({ section }) => (
@@ -88,8 +124,11 @@ class CalendarView extends React.Component {
       calData, userSchedule,
     } = this.state;
 
+    console.log(this.state.calData);
+
     return (
       <Container style={{ display: 'flex' }}>
+        {/* 상단 달력 - isSelected로 선택된 날짜를 공유한다. */}
         <View style={styles.container}>
           <Calendar
             displayLodingIndicator
@@ -100,7 +139,6 @@ class CalendarView extends React.Component {
         </View>
         {/* 하단 카테고리 목록 */}
         <View style={styles.bottomList}>
-          <Text style={styles.buttomListHeader}>{moment(this.state.selected).format('YYYY')}년 {moment(this.state.seleted).format('M')}월 {moment(this.state.selected).format('DD')} 일의 일정</Text>
           <SectionList
             sections={userSchedule}
             renderItem={this._renderItem}
@@ -108,6 +146,8 @@ class CalendarView extends React.Component {
             keyExtractor={item => (
               item.name
             )}
+            renderSectionFooter={() => <CalDataFooter />}
+            stickySectionHeadersEnabled="true"
           />
         </View>
       </Container>
