@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
 });
 
 class TaskList extends Component {
+  static propTypes = {
+    push: PropTypes.func.isRequired,
+    navigator: PropTypes.shape({
+      showModal: PropTypes.func,
+    }).isRequired,
+  }
   handleCategoryClick = (category) => {
     this.props.push({
       screen: 'stack.ListInCategory',
@@ -39,7 +45,6 @@ class TaskList extends Component {
     });
   }
   render() {
-    const { list, layout } = this.props;
     return (
       <Container style={styles.container}>
         <Content>

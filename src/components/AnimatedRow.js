@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Animated } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
 const DEFAULT_TRANSITION = 500;
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    borderRadius: 5,
+  },
+});
 export default class AnimatedRow extends Component {
   static propTypes = {
     remove: PropTypes.bool.isRequired,
@@ -37,7 +44,6 @@ export default class AnimatedRow extends Component {
     ]).start(callback);
   }
   render() {
-    const { style } = this.props;
     const { opacity, backgroundColor } = this.state;
     const backgroundColorAnim = backgroundColor.interpolate({
       inputRange: [0, 1],
@@ -45,7 +51,7 @@ export default class AnimatedRow extends Component {
     });
     return (
       <Animated.View
-        style={[style, { flex: 1, opacity, backgroundColor: backgroundColorAnim }]}
+        style={[styles.container, { flex: 1, opacity, backgroundColor: backgroundColorAnim }]}
       >
         {this.props.children}
       </Animated.View>

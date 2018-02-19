@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ViewPropTypes } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
+
 import { AnimatedRow } from './';
 
 const DOUBLE_PRESS_DELAY = 400;
@@ -11,14 +13,21 @@ export default class DoubleTapWrapper extends React.PureComponent {
     children: PropTypes.element.isRequired,
     onPress: PropTypes.func,
     onDoubleTap: PropTypes.func.isRequired,
-    animation: PropTypes.bool.isRequired,
+    animation: PropTypes.bool,
     onAnimationEnd: PropTypes.func.isRequired,
-    innerStyle: PropTypes.node.isRequired,
+    style: ViewPropTypes.style,
     animationComponent: PropTypes.element,
   }
   static defaultProps = {
+    animation: true,
+    style: {
+      height: 50,
+      backgroundColor: '#E9E9E9',
+      marginTop: 5,
+      borderRadius: 5,
+    },
     onPress: () => {},
-    animationComponent: null,
+    animationComponent: <Icon name="check" color="#FBFBFB" size={20} />,
   }
   constructor() {
     super();
@@ -48,13 +57,11 @@ export default class DoubleTapWrapper extends React.PureComponent {
       animation,
       animationComponent,
       children,
-      innerStyle,
       onAnimationEnd,
     } = this.props;
     const innerView = animation ?
       (
         <AnimatedRow
-          style={innerStyle}
           remove={this.isRemoving}
           onRemove={onAnimationEnd}
         >

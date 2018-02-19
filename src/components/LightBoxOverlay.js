@@ -87,7 +87,6 @@ export default class LightBoxOverlay extends Component {
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => (
           !this.state.isAnimating && gestureState.dx !== 0 && gestureState.dy !== 0
         ),
-  
         onPanResponderGrant: () => {
           this.state.pan.setValue(0);
           this.setState({ isPanning: true });
@@ -188,6 +187,7 @@ export default class LightBoxOverlay extends Component {
       <Animated.View
         style={[styles.background, lightboxOpacityStyle, { backgroundColor: 'black' }]}
       >
+        {undefined}
       </Animated.View>
     );
     const animatedStyle = {
@@ -212,7 +212,7 @@ export default class LightBoxOverlay extends Component {
       </Animated.View>
     );
     return (
-      <Modal visible={isOpen} transparent onRequestClose={() => this.close()}>
+      <Modal visible={isOpen} onRequestClose={() => this.close()}>
         {background}
         {header}
         <Animated.View style={[styles.open, animatedStyle, dragStyle]} {...handlers}>

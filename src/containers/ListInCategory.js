@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
-import AnimatedSection from '../components/AnimatedSection';
-import { DoubleTapWrapper } from '../components';
+import { DoubleTapWrapper, TaskSectionList } from '../components';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,24 +50,8 @@ export default class ListInCategory extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <AnimatedSection />
+        <TaskSectionList />
       </View>
     );
   }
 }
-
-/*
-
-        <SectionList
-          sections={sections}
-          keyExtractor={item => item.id}
-          renderItem={this._renderItem}
-          renderSectionHeader={
-            ({ section }) => (
-              <View style={{ backgroundColor: '#FBFBFB' }}>
-                <Text style={{ padding: 10 }}>{today === section.date ? '오늘' : section.date}</Text>
-              </View>
-            )
-          }
-        />
-        */

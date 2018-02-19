@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 /*
   김범준씨 이것은 stack navigation 을 더블클릭 했을 때, 두번 열리는 것을 방지하기 위한
   Higher Order Component 입니다.
@@ -7,6 +7,11 @@ import React, { Component } from 'react';
 */
 export default function StackHOC(Comp) {
   return class PreventNavStackDuplicate extends Component {
+    static propTypes = {
+      navigator: PropTypes.shape({
+        push: PropTypes.func,
+      }).isRequired,
+    }
     _lastAction = { params: undefined, timestamp: 0 };
     _navigated = null
 

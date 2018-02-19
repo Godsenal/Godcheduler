@@ -47,7 +47,9 @@ export default class LightBox extends Component {
           isOpen: true,
         });
         setTimeout(() => {
-          this._root && this.state.layoutOpacity.setValue(0);
+          if (this._root) {
+            this.state.layoutOpacity.setValue(0);
+          }
         });
       });
     });
@@ -61,7 +63,7 @@ export default class LightBox extends Component {
   render() {
     const { layoutOpacity } = this.state;
     return (
-      <View ref={component => this._root = component} onLayout={() => {}}>
+      <View ref={(component) => { this._root = component; }} onLayout={() => {}}>
         <Animated.View style={{ opacity: layoutOpacity }}>
           <TouchableOpacity
             onPress={this._open}

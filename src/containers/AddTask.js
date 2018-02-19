@@ -4,7 +4,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Keyboard } from 'react-native';
+  Keyboard,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Container, Content, Footer, FooterTab, Input, Text, Item, Button } from 'native-base';
 import PropTypes from 'prop-types';
@@ -79,6 +80,10 @@ class AddTask extends Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
     category: PropTypes.string,
+    navigator: PropTypes.shape({
+      setOnNavigatorEvent: PropTypes.func,
+      dismissModal: PropTypes.func,
+    }).isRequired,
   }
   static defaultProps = {
     category: '',
