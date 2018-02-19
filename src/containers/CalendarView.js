@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, SectionList } from 'react-native';
-import { Container, View, Text } from 'native-base';
+import { Container, View } from 'native-base';
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 import CalDataHeader from '../components/CalDataHeader';
@@ -90,20 +90,22 @@ class CalendarView extends React.Component {
 
   makeCalendarData = (day) => {
     const itemData = {};
-    this.state.userSchedule.map((value) => {
-      Object.assign(itemData, { [value.date]: { dots: value.data.map(({ category }) => category) } });
+    this.state.userSchedule.forEach((value) => {
+      Object.assign(itemData, {
+        [value.date]: {
+          dots: value.data.map(({ category }) => category),
+        },
+      });
     });
 
-    this.setState((prevState) => {
-      return {
-        selected: day,
-        calData: {
-          ...this.state.scheduleData,
-          ...itemData,
-          [day]: Object.assign({}, prevState.calData[day], { selected: true }),
-        },
-      };
-    });
+    this.setState(prevState => ({
+      selected: day,
+      calData: {
+        ...this.state.scheduleData,
+        ...itemData,
+        [day]: Object.assign({}, prevState.calData[day], { selected: true }),
+      },
+    }));
   }
 
   _renderItem = ({ item }) => (

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Animated, View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { Animated, View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions, findNodeHandle, UIManager } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { DoubleTapWrapper } from './';
 import { color } from '../config';
 
-const DEFAULT_TRANSITION = 250;
+const DEFAULT_TRANSITION = 150;
 const DEFAULT_PADDING = 20;
 const WINDOW_WIDTH = Dimensions.get('window').width;
 const styles = StyleSheet.create({
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class TaskSectionListItem extends Component {
+export default class AnimatedCard extends Component {
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -81,13 +81,10 @@ export default class TaskSectionListItem extends Component {
   _onTap = () => {
     const willOpacity = this.state.isInit ? 1 : 0;
     this._isAnimating = true;
-    this._root.getNode().measure((ox, oy) => {
-      if (!this.state.isInit) {
-        this.props.allowScroll(true);
-      } else {
-        this.props.allowScroll(false);
-        this.props.scrollTo(oy);
-      }
+
+    this.setState({
+      isInit: !this.state.isInit,
+    }, () => {
       Animated.timing(this.state.opacity, {
         toValue: willOpacity,
         duration: DEFAULT_TRANSITION,
@@ -96,8 +93,14 @@ export default class TaskSectionListItem extends Component {
   }
   _onAnimationEnd = () => {
     this._isAnimating = false;
-    this.setState({
-      isInit: !this.state.isInit,
+    const handle = findNodeHandle(this._root.getNode());
+    UIManager.measureLayoutRelativeToParent(handle, (err) => { console.error(err); }, (ox, oy) => {
+      if (this.state.isInit) {
+        this.props.allowScroll(true);
+      } else {
+        this.props.allowScroll(false);
+        this.props.scrollTo(oy);
+      }
     });
   }
   render() {

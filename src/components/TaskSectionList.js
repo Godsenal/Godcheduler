@@ -31,18 +31,6 @@ export default class TaskSectionList extends Component {
       allowScroll: allow,
     });
   }
-  _onDoubleTap = (date, id) => {
-    this.setState(prevState => ({
-      removeQueue: [...prevState.removeQueue, { date, id }],
-      removeItem: id,
-    }));
-  }
-  _removeItem = (id) => {
-    this.setState(prevState => ({
-      data: prevState.data.filter(item => item.id !== id),
-      removeQueue: prevState.removeQueue.slice(0, -1),
-    }));
-  }
   render() {
     const { layout, allowScroll, data } = this.state;
     return (
