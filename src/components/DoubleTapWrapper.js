@@ -22,9 +22,7 @@ export default class DoubleTapWrapper extends React.PureComponent {
     animation: true,
     style: {
       height: 50,
-      backgroundColor: '#E9E9E9',
-      marginTop: 5,
-      borderRadius: 5,
+      backgroundColor: 'white',
     },
     onPress: () => {},
     animationComponent: <Icon name="check" color="#FBFBFB" size={20} />,
