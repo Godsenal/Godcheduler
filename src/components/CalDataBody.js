@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   outSide : {
-    paddingLeft: 3,
-    paddingRight: 3,
+    marginHorizontal: 3,
   },
   card: {
     padding: 5,
@@ -32,7 +31,7 @@ const CalDataBody = (props) => {
   } = props;
 
   const { color } = category;
-  const labelStyle = StyleSheet.flatten([styles.labelStyle, { backgroundColor: color }]);
+  const labelStyle = [styles.labelStyle, { backgroundColor: color }];
 
   return (
     <View style={styles.outSide}>

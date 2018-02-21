@@ -4,8 +4,7 @@ import { View } from 'native-base';
 
 const styles = StyleSheet.create({
   outSide: {
-    paddingLeft: 3,
-    paddingRight: 3,
+    marginHorizontal: 3,
   },
   textWrapper: {
     backgroundColor: '#cfd3d0',
@@ -21,18 +20,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const CalDataHeader = (props) => {
-  const {
-    date,
-  } = props;
-
-  return (
-    <View style={styles.outSide}>
-      <View style={styles.textWrapper}>
-        <Text style={styles.text}>{date}</Text>
-      </View>
+const CalDataHeader = ({ date }) => (
+  <View style={styles.outSide}>
+    <View style={styles.textWrapper}>
+      <Text style={styles.text}>{date}</Text>
     </View>
-  );
-};
+  </View>
+);
 
 export default CalDataHeader;

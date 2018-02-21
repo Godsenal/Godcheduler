@@ -3,9 +3,8 @@ import { StyleSheet, SectionList } from 'react-native';
 import { Container, View } from 'native-base';
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
-import CalDataHeader from '../components/CalDataHeader';
-import CalDataBody from '../components/CalDataBody';
-import CalDataFooter from '../components/CalDataFooter';
+
+import { CalDataHeader, CalDataBody, CalDataFooter } from '../components';
 
 const styles = StyleSheet.create({
   container: {
@@ -149,7 +148,7 @@ class CalendarView extends React.Component {
               item.name
             )}
             renderSectionFooter={() => <CalDataFooter />}
-            stickySectionHeadersEnabled="true"
+            stickySectionHeadersEnabled
           />
         </View>
       </Container>

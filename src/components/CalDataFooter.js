@@ -3,8 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   outSide: {
-    paddingLeft: 3,
-    paddingRight: 3,
+    marginHorizontal: 3,
     paddingBottom: 7,
   },
   footer: {
