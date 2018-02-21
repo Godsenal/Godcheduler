@@ -58,7 +58,8 @@ export default class TaskSectionList extends Component {
           scrollTo={this._scrollTo}
           containerHeight={layout.height}
           allowScroll={this._allowScroll}
-          data={data.slice(21, 30)}
+          data={data.slice(21, 50)}
+          lastSection
         />
       </ScrollView>
     );

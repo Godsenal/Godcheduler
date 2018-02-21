@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions, findNodeHandle, UIManager } from 'react-native';
+import { Animated, View, Text, FlatList, TouchableOpacity, StyleSheet, Dimensions, findNodeHandle, UIManager, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { DoubleTapWrapper } from './';
@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
   },
   cardBody: {
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
     overflow: 'hidden',
   },
   cardFooter: {
@@ -52,10 +50,12 @@ export default class AnimatedCard extends Component {
     containerHeight: PropTypes.number.isRequired,
     scrollTo: PropTypes.func,
     allowScroll: PropTypes.func,
+    lastSection: PropTypes.bool,
   }
   static defaultProps = {
     scrollTo: () => {},
     allowScroll: () => {},
+    lastSection: false,
   }
   state = {
     data: this.props.data,
@@ -82,30 +82,103 @@ export default class AnimatedCard extends Component {
     const willOpacity = this.state.isInit ? 1 : 0;
     this._isAnimating = true;
 
-    this.setState({
-      isInit: !this.state.isInit,
-    }, () => {
-      Animated.timing(this.state.opacity, {
-        toValue: willOpacity,
-        duration: DEFAULT_TRANSITION,
-      }).start(this._onAnimationEnd);
+    const handle = findNodeHandle(this._root.getNode());
+    UIManager.measureLayoutRelativeToParent(handle, (err) => { console.error(err); }, (ox, oy) => {
+      this.setState({
+        isInit: !this.state.isInit,
+      }, () => {
+        if (this.state.isInit) {
+          this.props.allowScroll(true);
+        } else {
+          this.props.allowScroll(false);
+          this.props.scrollTo(oy);
+        }
+        Animated.timing(this.state.opacity, {
+          toValue: willOpacity,
+          duration: DEFAULT_TRANSITION,
+        }).start(this._onAnimationEnd);
+      });
     });
   }
   _onAnimationEnd = () => {
     this._isAnimating = false;
-    const handle = findNodeHandle(this._root.getNode());
-    UIManager.measureLayoutRelativeToParent(handle, (err) => { console.error(err); }, (ox, oy) => {
-      if (this.state.isInit) {
-        this.props.allowScroll(true);
-      } else {
-        this.props.allowScroll(false);
-        this.props.scrollTo(oy);
-      }
-    });
+  }
+  _renderSeparator = () => (
+    <View
+      style={{
+        height: 1,
+        width: '90%',
+        backgroundColor: color.whitegray,
+        marginLeft: '5%',
+        marginRight: '5%',
+      }}
+    />
+  );
+  _renderItem = ({ item }) => (
+    <DoubleTapWrapper
+      key={item.id}
+      {...item}
+      onDoubleTap={() => this._onDoubleTap(item.id)}
+      onAnimationEnd={() => this._removeItem(item.id)}
+    >
+      <Text style={{ color: 'black' }}>
+        {item.text}
+      </Text>
+    </DoubleTapWrapper>
+  )
+  _renderBody = () => {
+    const { data, removeQueue } = this.state;
+    const { lastSection } = this.props;
+    if (lastSection) {
+      return (
+        <View style={styles.cardBody}>
+          <FlatList
+            keyExtractor={item => item.id}
+            renderItem={this._renderItem}
+            ItemSeparatorComponent={this._renderSeparator}
+            data={data}
+            extraData={removeQueue}
+          />
+        </View>
+      );
+    }
+    const { isInit, opacity } = this.state;
+    const { containerHeight } = this.props;
+    const bodyStyle = [styles.cardBody, {
+      height: opacity.interpolate({
+        inputRange: [0, 1],
+        outputRange: [200, containerHeight - (40 + (DEFAULT_PADDING * 2))],
+      }),
+    }];
+    return (
+      <Animated.View style={bodyStyle}>
+        <FlatList
+          keyExtractor={item => item.id}
+          renderItem={this._renderItem}
+          ItemSeparatorComponent={this._renderSeparator}
+          data={isInit ? data.slice(0, 3) : data}
+          extraData={removeQueue}
+        />
+      </Animated.View>
+    );
+  }
+  _renderFooter = () => {
+    const { isInit } = this.state;
+    const { lastSection } = this.props;
+    if (lastSection) {
+      return null;
+    }
+    return (
+      <View style={styles.cardFooter}>
+        <TouchableOpacity onPress={this._onTap}>
+          <Text style={{ textAlign: 'right' }}>{isInit ? '더 보기' : '최소화'}</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
   render() {
-    const { isInit, opacity, data } = this.state;
-    const { header, containerHeight } = this.props;
+    const { opacity } = this.state;
+    const { header } = this.props;
     const containerStyle = [styles.card, {
       marginHorizontal: opacity.interpolate({
         inputRange: [0, 1],
@@ -118,40 +191,13 @@ export default class AnimatedCard extends Component {
         outputRange: [20, 30],
       }),
     }];
-    const bodyStyle = [styles.cardBody, {
-      height: opacity.interpolate({
-        inputRange: [0, 1],
-        outputRange: [200, containerHeight - (40 + (DEFAULT_PADDING * 2))],
-      }),
-    }];
     return (
       <Animated.View style={containerStyle} ref={(ref) => { this._root = ref; }}>
         <Animated.View style={headerStyle}>
           <Text>{header}</Text>
         </Animated.View>
-        <Animated.View style={bodyStyle}>
-          <ScrollView
-            scrollEnabled={!isInit}
-          >
-            {data.slice(0, isInit || this._isAnimating ? 3 : 10).map(item => (
-              <DoubleTapWrapper
-                key={item.id}
-                {...item}
-                onDoubleTap={() => this._onDoubleTap(item.id)}
-                onAnimationEnd={() => this._removeItem(item.id)}
-              >
-                <Text style={{ color: 'black' }}>
-                  {item.text}
-                </Text>
-              </DoubleTapWrapper>
-            ))}
-          </ScrollView>
-        </Animated.View>
-        <View style={styles.cardFooter}>
-          <TouchableOpacity onPress={this._onTap}>
-            <Text style={{ textAlign: 'right' }}>{isInit ? '더 보기' : '최소화'}</Text>
-          </TouchableOpacity>
-        </View>
+        {this._renderBody()}
+        {this._renderFooter()}
       </Animated.View>
     );
   }
